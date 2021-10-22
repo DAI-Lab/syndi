@@ -1,0 +1,18 @@
+syndi\_benchmark package
+========================
+
+Submodules
+----------
+
+.. toctree::
+
+   syndi_benchmark.cli
+   syndi_benchmark.syndi_benchmark
+
+Module contents
+---------------
+
+.. automodule:: syndi_benchmark
+   :members:
+   :undoc-members:
+   :show-inheritance:

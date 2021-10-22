@@ -1,0 +1,7 @@
+syndi\_benchmark.cli module
+===========================
+
+.. automodule:: syndi_benchmark.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
