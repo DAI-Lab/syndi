@@ -7,7 +7,6 @@ on:
     branches: [ master ]
 
 jobs:
-  run: ENVTMPDIR=$RUNNER_TEMP
   build:
     runs-on: ${{ matrix.os }}
     strategy:
@@ -16,6 +15,14 @@ jobs:
         os: [ubuntu-latest, macos-latest]
 
     steps:
+    - name: setup temporary directory
+      run: |
+        echo "{ENVTMPDIR}=${RUNNER_TEMP}" >> $GITHUB_ENV $ 
+    - name: check temporary directory
+      run: |
+        echo "${{ env.ENVTMPDIR }}"
+      run: |
+        echo "${{ env.RUNNER_TEMP }}" 
     - uses: actions/checkout@v1
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
