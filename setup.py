@@ -11,7 +11,11 @@ with open('README.md', encoding='utf-8') as readme_file:
 with open('HISTORY.md', encoding='utf-8') as history_file:
     history = history_file.read()
 
-install_requires = ['Click>=6.0',
+install_requires = [
+    'Click>=6.0',
+    'pandas==1.1.4',
+    'sdv==0.9.0',
+    'pycaret>=2.3.4'
 ]
 
 setup_requires = [
