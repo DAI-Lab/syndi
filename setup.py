@@ -12,11 +12,19 @@ with open('HISTORY.md', encoding='utf-8') as history_file:
     history = history_file.read()
 
 install_requires = [
-    'Click>=6.0',
-    'pandas',
+    's3fs>=0.2.2,<0.5',
+    'numpy>=1.18,<1.20',
+    'pandas>=1.1,<1.1.5',
+    'scikit-learn>=0.23.1,<0.24',
+    'pycaret>=2.3.0,<2.4',
     'sdv==0.9.0',
-    'pycaret>=2.3.4'
-]
+    'pyts>=0.9,<0.11',
+
+    # fix conflict
+    'h5py<2.11.0,>=2.10.0',
+    'urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1',
+    'matplotlib>=3.3.3, <3.4'
+    ]
 
 setup_requires = [
     'pytest-runner>=2.11.1',
@@ -25,6 +33,7 @@ setup_requires = [
 tests_require = [
     'pytest>=3.4.2',
     'pytest-cov>=2.6.0',
+    'rundoc>=0.4.3,<0.5',
 ]
 
 development_requires = [
@@ -89,7 +98,7 @@ setup(
     keywords='syndi_benchmark syndi-benchmark syndi-benchmark',
     name='syndi-benchmark',
     packages=find_packages(include=['syndi_benchmark', 'syndi_benchmark.*']),
-    python_requires='>=3.5',
+    python_requires='>=3.6',
     setup_requires=setup_requires,
     test_suite='tests',
     tests_require=tests_require,
