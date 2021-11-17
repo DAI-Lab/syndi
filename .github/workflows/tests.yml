@@ -17,11 +17,11 @@ jobs:
     steps:
     - name: setup temporary directory
       run: |
-        echo "{ENVTMPDIR}=$(mktemp -d)" >> $GITHUB_ENV $ 
+        echo "ENVTMPDIR=$(mktemp -d)" >> $GITHUB_ENV $ 
     - name: check temporary directory
       run: |
-        echo "${{ env.ENVTMPDIR }}"
-        
+        echo "$ENVTMPDIR"
+
     - uses: actions/checkout@v1
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v1
