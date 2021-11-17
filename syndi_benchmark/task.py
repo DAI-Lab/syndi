@@ -20,7 +20,7 @@ def _get_sample_method_ids_no_baseline(sample_method):
         yield from _get_sample_method_ids_no_baseline("original")
     elif sample_method ==  "original":
         for i in range(ORIGINAL_STEPS):
-            yield f"original_{str(i)}"
+            yield "original_{}".format(str(i))
     elif sample_method ==  "uniform":
         yield "uniform"
     elif sample_method == "baseline":

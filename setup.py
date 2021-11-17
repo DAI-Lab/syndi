@@ -13,7 +13,7 @@ with open('HISTORY.md', encoding='utf-8') as history_file:
 
 install_requires = [
     'Click>=6.0',
-    'pandas==1.1.4',
+    'pandas',
     'sdv==0.9.0',
     'pycaret>=2.3.4'
 ]
@@ -65,7 +65,7 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
+        # 'Programming Language :: Python :: 3.5', TODO
         'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',

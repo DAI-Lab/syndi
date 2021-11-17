@@ -110,12 +110,12 @@ class Sampler():
             valid_data = more_data[valid_indexes]
             data = pd.concat([data, valid_data])
             if retries > max_retries:
-                error_msg = f"failed to generate {sample_size} samples for target \"{self.task.target}\" in range {interval} with max-retries {max_retries}. Only generated {data.shape[0]}\n"
+                error_msg = "failed to generate {} samples for target \"{}\" in range {} with max-retries {}. Only generated {}\n".format(sample_size, self.task.target, interval, max_retries, data.shape[0])
                 self.logs.append(error_msg)
                 break
             retries += 1
             # print(f"samplesize: {increasing_sample_size}")
-        print(f"retries: {retries}")
+        print("retries: {}".format(retries))
         data = data.head(sample_size)
         return data
     def _sample_uniform_regression(self):

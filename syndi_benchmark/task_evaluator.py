@@ -110,12 +110,12 @@ class Task_Evaluator():
     
     def _store_classifier(self, classifier_model):
         task_output_dir = self.task.output_dir
-        classifier_file_name = f"classifier_{self.task.pycaret_model}"
+        classifier_file_name = "classifier_{}".format(self.task.pycaret_model)
         classifier_output_path = os.path.join(task_output_dir, classifier_file_name)
         classification.save_model(classifier_model, classifier_output_path)
     def _store_regresser(self, regression_model):
         task_output_dir = self.task.output_dir
-        regressor_file_name = f"regressor_{self.task.pycaret_model}"
+        regressor_file_name = "regressor_{}".format(self.task.pycaret_model)
         regressor_output_path = os.path.join(task_output_dir, regressor_file_name)
         regression.save_model(regression_model, regressor_output_path)
 
