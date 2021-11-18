@@ -2,9 +2,11 @@ import unittest
 import pathlib as pl
 import pandas as pd
 import os
+import pytest
 
-import utils
+import syndi_benchmark.utils as utils
 
+@pytest.mark.usefixtures("change_test_dir")
 class TestUtils(unittest.TestCase):
     def test_split_data(self):
         #make minidataset to test on

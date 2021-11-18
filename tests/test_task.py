@@ -1,11 +1,15 @@
 import unittest
-import task
+import syndi_benchmark.task as task
 import pathlib as pl
 import pandas as pd
 import os
 import json
 import shutil
+import pytest
 
+_BASE_PATH = os.path.abspath(os.path.dirname(__file__))
+
+@pytest.mark.usefixtures("change_test_dir")
 class TestTask(unittest.TestCase):        
     def test_task_init(self):
         task_id = "test_id"

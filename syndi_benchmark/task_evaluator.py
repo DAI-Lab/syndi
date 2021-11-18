@@ -6,8 +6,8 @@ import sdv.sdv
 import sdmetrics
 import sklearn
 import os
-from sampler import Sampler
-import task
+from syndi_benchmark.sampler import Sampler
+import syndi_benchmark.task as task
 from pycaret import classification
 from pycaret import regression
 

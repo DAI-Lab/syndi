@@ -3,10 +3,14 @@ import pathlib as pl
 import pandas as pd
 import os
 import shutil
+import pytest
 
-import task
-import task_evaluator
+import syndi_benchmark.task as task
+import syndi_benchmark.task_evaluator as task_evaluator
 
+_BASE_PATH = os.path.abspath(os.path.dirname(__file__))
+
+@pytest.mark.usefixtures("change_test_dir")
 class TestTaskEvauator(unittest.TestCase):
     def setUp(self):
         # output directory setup

@@ -8,8 +8,8 @@ import sdmetrics
 import sklearn
 import os
 import pickle
-import task
-import task_evaluator
+import syndi_benchmark.task as task
+import syndi_benchmark.task_evaluator as task_evaluator
 import numpy as np
 import traceback
 

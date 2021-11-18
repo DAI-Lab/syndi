@@ -8,7 +8,7 @@ import sdmetrics
 import sklearn
 import os
 import pickle
-import task
+import syndi_benchmark.task as task
 import random
 import math
 import sys
@@ -65,10 +65,23 @@ class Sampler():
         else:
             return self._sample_uniform_classification()
 
-    def _get_class_to_sample_size(self):
+    def _get_class_to_sample_size(self, data):
         target = self.task.target
-        target_category_frequencies = self.train_data[target].value_counts().to_dict()
-        largest_target = self.train_data[target].value_counts().nlargest(n=1).values[0] # get largest target category
+        # if is_regression:
+        #     start = self.train_data[target].max()
+        #     stop = self.train_data[target].min()
+        #     step = (start - stop)/self.task.regression_bins
+        #     splits = np.arange(start, stop, step)
+        #     intervals = []
+        #     for i in range(len(splits)):
+        #         left = splits[i] 
+        #         left -= left * .04
+        #         right = splits[i+1] 
+        #         right += right * .04
+        #         intervals.append(pd.Interval(left=left, right=right))
+        # else:
+        target_category_frequencies = data[target].value_counts().to_dict()
+        largest_target = data[target].value_counts().nlargest(n=1).values[0] # get largest target category
         class_to_sample_size = {}
         for class_name in target_category_frequencies:
             sample_size = largest_target - target_category_frequencies[class_name]
@@ -78,7 +91,7 @@ class Sampler():
     def _sample_uniform_classification(self):
         sampling_method = "uniform"
         target = self.task.target
-        class_to_sample_size = self._get_class_to_sample_size()
+        class_to_sample_size = self._get_class_to_sample_size(self.train_data)
         all_sampled_data = []
         for class_name, sample_size in class_to_sample_size.items():
             if sample_size > 0:
@@ -138,12 +151,11 @@ class Sampler():
         sampling_method = self.task.sampling_method_id
         bins = self.task.regression_bins
         original_data = self.train_data
-        self.train_data = self.train_data.copy()
-        self.train_data[self.task.target] = pd.cut(x=self.train_data[self.task.target], bins=bins)
+        binned_data = self.train_data.copy()
+        binned_data[self.task.target] = pd.cut(x=self.train_data[self.task.target], bins=bins)
         #synthetic_data, sampling_method, score_aggregate = self._sample_uniform_classification()
-        class_to_sample_size = self._get_class_to_sample_size()
-        
-        self.train_data = original_data
+        class_to_sample_size = self._get_class_to_sample_size(binned_data)
+        print(class_to_sample_size)
         dtype = self.train_data[self.task.target].dtypes
         def int_uniform_bin_draw(interval):
             left = interval.left+1 if interval.left.is_integer() else interval.left

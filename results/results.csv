@@ -1,0 +1,2 @@
+,Task ID,SD Generator Path,Classifier Name,Sampling Method,Run,Status,mae,mse,r2,msle
+0,test_id,regression_generators/TvaeModel.pkl,lr,uniform,0,Status.RUNNING,,,,

@@ -3,10 +3,12 @@ import pathlib as pl
 import pandas as pd
 import os
 import numpy as np
+import pytest
 
-import benchmark
-import task
+import syndi_benchmark.benchmark as benchmark
+import syndi_benchmark.task as task
 
+@pytest.mark.usefixtures("change_test_dir")
 class TestBenchmark(unittest.TestCase):
     def results_table(self):
         results_output_path = "results/"
