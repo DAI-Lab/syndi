@@ -81,11 +81,15 @@ class Sampler():
         #         intervals.append(pd.Interval(left=left, right=right))
         # else:
         target_category_frequencies = data[target].value_counts().to_dict()
+        print("in function")
+        print(target_category_frequencies)
         largest_target = data[target].value_counts().nlargest(n=1).values[0] # get largest target category
         class_to_sample_size = {}
         for class_name in target_category_frequencies:
             sample_size = largest_target - target_category_frequencies[class_name]
             class_to_sample_size[class_name] = sample_size
+        print(class_to_sample_size)
+        print("out function")
         return class_to_sample_size
 
     def _sample_uniform_classification(self):
@@ -98,8 +102,12 @@ class Sampler():
                 conditions = {
                 target : class_name
                 } 
-                data = self.generator.sample(sample_size, conditions=conditions)
-                all_sampled_data.append(data)
+                try:
+                    data = self.generator.sample(sample_size, conditions=conditions)
+                    all_sampled_data.append(data)
+                except:
+                    error_msg = "failed to generate {} samples for target \"{}\" with condition {}".format(sample_size, self.task.target, conditions)
+                    self.logs.append(error_msg)
         if len(all_sampled_data):
             synthetic_data = pd.concat(all_sampled_data)
             score_aggregate = evaluate(synthetic_data, self.train_data, aggregate=True)
@@ -109,26 +117,29 @@ class Sampler():
         else:
             return None, sampling_method, None
     def _sample_in_interval(self, sample_size, interval, max_retries=100):
+        target = self.task.target
         increasing_sample_size = sample_size
         increasing_sample_size *= self.task.regression_bins
+        def get_subtable_in_interval(interval, table):
+            valid_indexes = table[target].between(interval.left, interval.right, inclusive="right")
+            table = table[valid_indexes]
+            table = table[table[self.task.target].ne(interval.left)]
+            return table
+
         data = self.generator.sample(increasing_sample_size)
-        data = data[data[self.task.target].between(interval.left, interval.right, inclusive=True)]
+        data = get_subtable_in_interval(interval, data)
         retries = 0
         while data.shape[0] < sample_size:
             if not (increasing_sample_size > sys.maxsize /self.task.regression_bins):
                 increasing_sample_size *= self.task.regression_bins
             more_data = self.generator.sample(sample_size)
-            valid_indexes = more_data[self.task.target].between(
-                interval.left, interval.right, inclusive=True)
-            valid_data = more_data[valid_indexes]
+            valid_data = get_subtable_in_interval(interval, more_data)
             data = pd.concat([data, valid_data])
             if retries > max_retries:
                 error_msg = "failed to generate {} samples for target \"{}\" in range {} with max-retries {}. Only generated {}\n".format(sample_size, self.task.target, interval, max_retries, data.shape[0])
                 self.logs.append(error_msg)
                 break
             retries += 1
-            # print(f"samplesize: {increasing_sample_size}")
-        print("retries: {}".format(retries))
         data = data.head(sample_size)
         return data
     def _sample_uniform_regression(self):

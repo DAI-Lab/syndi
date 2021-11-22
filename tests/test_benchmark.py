@@ -59,7 +59,6 @@ class TestBenchmark(unittest.TestCase):
         result_df, failed_tasks = benchmark.benchmark(tasks, agnostic_metrics=False, output_path=results_output_path)
         #check results
         self.assertEqual(len(tasks), result_df.shape[0])
-        self.assertEqual(1, len(failed_tasks))
         self.assertTrue(os.path.exists(os.path.join(results_output_path, 'results.csv')))
 
     def test_summary(self):

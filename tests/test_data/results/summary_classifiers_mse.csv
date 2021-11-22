@@ -1,2 +1,2 @@
 ,Task ID,SD Generator Path,Classifier Name,Sampling Method,Run,Status,mae,mse,r2,msle
-0,test_id,regression_generators/TvaeModel.pkl,lr,uniform,0,Status.IMPERFECT,7269.744140625,80740952.0,0.45867653575815126,
+0,test_id,regression_generators/TvaeModel.pkl,lr,uniform,0,Status.IMPERFECT,7536.09619140625,86585856.0,0.41948969371819456,
