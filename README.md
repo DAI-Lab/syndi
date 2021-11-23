@@ -80,6 +80,15 @@ for development.
 Please head to the [Contributing Guide](https://DAI-Lab.github.io/syndi-benchmark/contributing.html#get-started)
 for more details about this process.
 
+Setting up tox:
+```
+pip install tox tox-pyenv
+pyenv install ...
+pyenv local ...
+```
+Where ... should be versions of python 3.6, 3.7, and 3.8.
+On my mac I used: 3.6.12, 3.7.9, 3.8.12
+
 # Quickstart
 
 In this short tutorial we will guide you through a series of steps that will help you
