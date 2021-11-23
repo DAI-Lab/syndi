@@ -80,6 +80,14 @@ for development.
 Please head to the [Contributing Guide](https://DAI-Lab.github.io/syndi-benchmark/contributing.html#get-started)
 for more details about this process.
 
+pyenv installation support can be found [here](https://stackoverflow.com/questions/66482346/problems-installing-python-3-6-with-pyenv-on-mac-os-big-sur)
+
+Use the following pyenv [documentation](https://github.com/pyenv/pyenv#basic-github-checkout) for setting up pyenv
+
+add the following line to your ~/.bashrc or ~/.zshrc directory
+```alias pyenv='CFLAGS="-I$(brew --prefix openssl)/include" LDFLAGS="-L$(brew --prefix openssl)/lib" pyenv'
+```
+
 Setting up tox:
 ```
 pip install tox tox-pyenv

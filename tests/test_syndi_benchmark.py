@@ -4,6 +4,7 @@
 """Tests for `syndi_benchmark` package."""
 
 import unittest
+
 from click.testing import CliRunner
 
 # from syndi_benchmark import syndi_benchmark
@@ -15,11 +16,9 @@ class TestSyndi_benchmark(unittest.TestCase):
 
     def setUp(self):
         """Set up test fixtures, if any."""
-        pass
 
     def tearDown(self):
         """Tear down test fixtures, if any."""
-        pass
 
     def test_000_something(self):
         """Test something."""

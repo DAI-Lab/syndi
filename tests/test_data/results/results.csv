@@ -1,5 +1,2 @@
 ,Task ID,SD Generator Path,Classifier Name,Sampling Method,Run,Status,mae,mse,r2,msle
-0,0_none_baseline_lr_0,regression_generators/CtganModel.pkl,lr,baseline,0,Status.SUCCESS,4252.61865234375,35574256.0,0.7614942968557381,
-1,1_TvaeModel_uniform_lr_0,regression_generators/TvaeModel.pkl,lr,uniform,0,Status.IMPERFECT,7300.1865234375,82091616.0,0.44962109691882646,
-2,2_GuassianCopulaModel_uniform_lr_0,regression_generators/GuassianCopulaModel.pkl,lr,uniform,0,Status.SUCCESS,10581.5224609375,165577664.0,-0.11010670959314961,
-3,3_CtganModel_uniform_lr_0,regression_generators/CtganModel.pkl,lr,uniform,0,Status.RUNNING,,,,
+0,test_id,regression_generators/TvaeModel.pkl,lr,uniform,0,Status.IMPERFECT,7292.2626953125,82133168.0,0.44934251415782644,

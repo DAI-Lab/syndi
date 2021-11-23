@@ -1,16 +1,15 @@
-import unittest
-import pathlib as pl
-import pandas as pd
 import os
-import sdv.sdv
 import shutil
-import numpy as np
-from sdv.tabular import GaussianCopula
+import unittest
+
+import pandas as pd
 import pytest
+import sdv.sdv
+from sdv.tabular import GaussianCopula
 
-
-from syndi_benchmark.task import Task
 from syndi_benchmark.sampler import Sampler
+from syndi_benchmark.task import Task
+
 
 @pytest.mark.usefixtures("change_test_dir")
 class TestSampler(unittest.TestCase):
@@ -30,19 +29,18 @@ class TestSampler(unittest.TestCase):
         task_id = "test_id"
         task_output_dir = os.path.join(output_dir, task_id)
         if os.path.exists(task_output_dir):
-            shutil.rmtree(task_output_dir) 
-        os.mkdir(task_output_dir) 
+            shutil.rmtree(task_output_dir)
+        os.mkdir(task_output_dir)
         # Task function setup
+
         def make_task(sampling_method_id, is_regression=False, target=target):
             return Task(task_id=task_id, train_dataset=train_data_path,
-                    test_dataset=test_data_path, target=target,
-                    path_to_generator=generator_path, sampling_method_id=sampling_method_id, 
-                    pycaret_model=classifier, run_num=run_num, output_dir=task_output_dir,
-                    is_regression=is_regression)
+                        test_dataset=test_data_path, target=target,
+                        path_to_generator=generator_path, sampling_method_id=sampling_method_id,
+                        pycaret_model=classifier, run_num=run_num, output_dir=task_output_dir,
+                        is_regression=is_regression)
         self.make_task = make_task
-    
-    
-    
+
     def test_original_0(self):
         task_original_0 = self.make_task("original_0")
         sampler = Sampler(task_original_0, self.train_data, self.generator)
@@ -52,6 +50,7 @@ class TestSampler(unittest.TestCase):
         self.assertIsInstance(score_aggregate, float)
         expected_synth_data_path = os.path.join(task_original_0.output_dir, "synthetic_data.csv")
         self.assertTrue(os.path.exists(expected_synth_data_path))
+
     def test_original_1(self):
         task_original_1 = self.make_task("original_1")
         sampler = Sampler(task_original_1, self.train_data, self.generator)
@@ -61,6 +60,7 @@ class TestSampler(unittest.TestCase):
         self.assertIsInstance(score_aggregate, float)
         expected_synth_data_path = os.path.join(task_original_1.output_dir, "synthetic_data.csv")
         self.assertTrue(os.path.exists(expected_synth_data_path))
+
     def test_original_2(self):
         task_original_2 = self.make_task("original_2")
         sampler = Sampler(task_original_2, self.train_data, self.generator)
@@ -80,7 +80,7 @@ class TestSampler(unittest.TestCase):
         self.assertEqual(score_aggregate, None)
         expected_synth_data_path = os.path.join(task_baseline.output_dir, "synthetic_data.csv")
         self.assertFalse(os.path.exists(expected_synth_data_path))
-    
+
     def test_uniform_sampling_method(self):
         task_uniform = self.make_task("uniform")
         sampler = Sampler(task_uniform, self.train_data, self.generator)
@@ -97,15 +97,15 @@ class TestSampler(unittest.TestCase):
 
         generator_path = "generators/default_tvae.pkl"
         self.generator = sdv.sdv.SDV.load(generator_path)
-        
+
         sampler = Sampler(task_uniform, self.train_data, self.generator)
         combined_data, sampling_method_info, score_aggregate = sampler.sample_data()
-        self.assertTrue(len(sampler.logs)>=0)
-        #TODO fix unfirom sampling bugs for classification
+        self.assertTrue(len(sampler.logs) >= 0)
+        # TODO fix unfirom sampling bugs for classification
         # error_msg = "No valid rows could be generated with the given conditions."
         # self.assertTrue(error_msg in str(context.exception))
 
-    def test_uniform_regression_int(self): #TODO add integer support for regression
+    def test_uniform_regression_int(self):  # TODO add integer support for regression
         # TestSampler.test_uniform_regression_int
         task_uniform = self.make_task("uniform", is_regression=True, target="Age")
         sampler = Sampler(task_uniform, self.train_data, self.generator)
@@ -114,8 +114,6 @@ class TestSampler(unittest.TestCase):
         copy_combined["Age"] = pd.cut(x=copy_combined["Age"], bins=5)
         for value in sampler._get_class_to_sample_size(copy_combined).values():
             self.assertEqual(value, 0)
-        
-        
 
     def test_uniform_regression_float(self):
         task_uniform = self.make_task("uniform", is_regression=True, target="Age")
@@ -133,31 +131,28 @@ class TestSampler(unittest.TestCase):
 
     def test_uniform_regression_retry(self):
         # TestSampler.test_uniform_regression_retry
-        results_output_path = "results/"
         task_output_path = "tasks/test_id"
         generator_path = "regression_generators/TvaeModel.pkl"
         train_data = "regression_data/train.csv"
         test_data = "regression_data/test.csv"
         target = "charges"
-        sampling_method_id="uniform"
-        classifier="lr"
-        run_num=0
-        is_regression=True
-        
+        sampling_method_id = "uniform"
+        classifier = "lr"
+        run_num = 0
+        is_regression = True
+
         task_uniform = Task(task_id="test_id", train_dataset=train_data,
-                    test_dataset=test_data, target=target,
-                    path_to_generator=generator_path, sampling_method_id=sampling_method_id, 
-                    pycaret_model=classifier, run_num=run_num, output_dir=task_output_path,
-                    is_regression=is_regression)
+                            test_dataset=test_data, target=target,
+                            path_to_generator=generator_path,
+                            sampling_method_id=sampling_method_id,
+                            pycaret_model=classifier, run_num=run_num, output_dir=task_output_path,
+                            is_regression=is_regression)
         generator = sdv.sdv.SDV.load(generator_path)
         loaded_train_data = pd.read_csv(train_data)
         sampler = Sampler(task_uniform, loaded_train_data, generator)
         combined_data, sampling_method_info, score_aggregate = sampler.sample_data()
         self.assertEqual(1, len(sampler.logs))
-        
-        
-        
-        
+
 
 if __name__ == '__main__':
     unittest.main()

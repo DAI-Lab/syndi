@@ -1,22 +1,21 @@
-from pycaret.classification import * # Preprocessing, modelling, interpretation, deployment...
-import pandas as pd # Basic data manipulation
-from sklearn.model_selection import train_test_split # Data split
-from sdv.tabular import CopulaGAN, GaussianCopula, CTGAN, TVAE # Synthetic data
-from sdv.evaluation import evaluate # Evaluate synthetic data
-import sdv.sdv
-import sdmetrics
-import sklearn
 import os
-import pickle
-import syndi_benchmark.task as task
-import syndi_benchmark.task_evaluator as task_evaluator
-import numpy as np
 import traceback
-
-ID_COLUMNS = ["Task ID", "SD Generator Path", "Classifier Name", "Sampling Method", "Run", "Status"]
-
-
 from enum import Enum
+
+import numpy as np
+import pandas as pd  # Basic data manipulation
+
+import syndi_benchmark.task_evaluator as task_evaluator
+
+ID_COLUMNS = [
+    "Task ID",
+    "SD Generator Path",
+    "Classifier Name",
+    "Sampling Method",
+    "Run",
+    "Status"]
+
+
 class Status(Enum):
     PENDING = 'PENDING'
     RUNNING = 'RUNNING'
@@ -28,12 +27,14 @@ class Status(Enum):
         self.reload()
         return self.status
 
+
 class Results_Table():
     def __init__(self, output_dir, tasks, metrics):
         columns = ID_COLUMNS + metrics
         self.columns = columns
         results = [[task.task_id, task.path_to_generator, task.pycaret_model,
-            task.sampling_method_id, task.run_num, Status.PENDING] + [np.nan]*len(metrics) for task in tasks]
+                    task.sampling_method_id, task.run_num,
+                    Status.PENDING] + [np.nan] * len(metrics) for task in tasks]
         result_df = pd.DataFrame(results, columns=columns)
         self.result_df = result_df
         self.output_path = os.path.join(output_dir, 'results.csv') if output_dir else None
@@ -42,19 +43,23 @@ class Results_Table():
             if not os.path.exists(output_dir):
                 os.mkdir(output_dir)
             self.result_df.to_csv(self.output_path)
+
     def update_row(self, row):
-        self.result_df.loc[self.result_df["Task ID"]==row[0], self.columns] = row
+        self.result_df.loc[self.result_df["Task ID"] == row[0], self.columns] = row
         if self.output_path:
             self.result_df.to_csv(self.output_path)
+
     def update_row_status(self, task_id, status):
-        self.result_df.loc[self.result_df["Task ID"]==task_id,"Status"] = status
+        self.result_df.loc[self.result_df["Task ID"] == task_id, "Status"] = status
         if self.output_path:
             self.result_df.to_csv(self.output_path)
+
     def get_df(self):
         return self.result_df
 
+
 def benchmark(tasks, metrics=None, agnostic_metrics=False,
-            output_path='results/', summary_metric="accuracy", is_regression=False):
+              output_path='results/', summary_metric="accuracy", is_regression=False):
     """Run benchmark testing on a set of tasks. Return detailed results of each run stored in a
     DataFrame object.
     Args:
@@ -74,10 +79,10 @@ def benchmark(tasks, metrics=None, agnostic_metrics=False,
         pd.DataFrame:
             benchmarking results in detail.
     """
-    all_metrics = task_evaluator.REGRESSION_METRICS if is_regression else task_evaluator.CLASSIFICATION_METRICS
+    all_metrics = task_evaluator.REGRESSION_METRICS if is_regression \
+        else task_evaluator.CLASSIFICATION_METRICS
     metrics = all_metrics if metrics is None else metrics
     failed_tasks = []
-    results = []
     results_table = None
     results_table = Results_Table(output_path, tasks, metrics)
     for task in tasks:
@@ -97,27 +102,29 @@ def benchmark(tasks, metrics=None, agnostic_metrics=False,
             logs = "\n".join(sampler_logs)
             write_sampler_logs(task.output_dir, logs)
             status = Status.IMPERFECT
-        if not row is None:
+        if row is not None:
             center = len(ID_COLUMNS) - 1
             results_table.update_row(row[:center] + [status] + row[center:])
 
-        
     # columns = ID_COLUMNS + metrics
     # result_df = pd.DataFrame.from_records(results, columns=columns)
     result_df = results_table.get_df()
-    summary_metric = "mse" if is_regression else "accuracy" 
+    summary_metric = "mse" if is_regression else "accuracy"
     summarize_results(3, summary_metric, result_df, output_path)
     return result_df, failed_tasks
+
 
 def write_error_log(task_output_dir, error_msg):
     error_log_output_path = os.path.join(task_output_dir, "error_log.txt")
     with open(error_log_output_path, "w") as text_file:
         text_file.write(error_msg)
 
+
 def write_sampler_logs(task_output_dir, logs):
     sampler_log_output_path = os.path.join(task_output_dir, "sampler_logs.txt")
     with open(sampler_log_output_path, "w") as text_file:
         text_file.write(logs)
+
 
 def summarize_sampling_method(metric, result_df, output_dir):
     """
@@ -125,7 +132,6 @@ def summarize_sampling_method(metric, result_df, output_dir):
 
     stores output in output_dir
     """
-    #summary_df = result_df.groupby('Sampling Method').max(metric).sort_values(metric, ascending=False)
     column_name = "Sampling Method"
     idx = result_df.groupby([column_name])[metric].transform(max) == result_df[metric]
     summary_df = result_df[idx].sort_values(metric, ascending=False)
@@ -147,6 +153,7 @@ def summarize_classifier(metric, result_df, output_dir):
         summary_df.to_csv(os.path.join(output_dir, f'summary_classifiers_{metric}.csv'))
     return summary_df
 
+
 def summarize_generator(metric, result_df, output_dir):
     """
     returns dataframe of top row (sorted by metric) for each generator in result_df.
@@ -160,6 +167,7 @@ def summarize_generator(metric, result_df, output_dir):
         summary_df.to_csv(os.path.join(output_dir, f'summary_generators_{metric}.csv'))
     return summary_df
 
+
 def summarize_top_n(n, metric, result_df, output_dir):
     """
     returns dataframe of top n rows in result_df sorted by metric.
@@ -170,6 +178,7 @@ def summarize_top_n(n, metric, result_df, output_dir):
     if output_dir:
         summary_df.to_csv(os.path.join(output_dir, f'summary_top_{n}_{metric}.csv'))
     return summary_df
+
 
 def summarize_results(n, metric, result_df, output_dir):
     summarize_sampling_method(metric, result_df, output_dir)

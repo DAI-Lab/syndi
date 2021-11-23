@@ -2,6 +2,7 @@
 
 """Console script for syndi-benchmark."""
 import sys
+
 import click
 
 
