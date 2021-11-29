@@ -12,18 +12,18 @@ with open('HISTORY.md', encoding='utf-8') as history_file:
     history = history_file.read()
 
 install_requires = [
-    's3fs>=0.2.2,<0.5',
-    'numpy>=1.18,<1.20',
-    'pandas>=1.1,<1.1.5',
-    'scikit-learn>=0.23.1,<0.24',
-    'pycaret>=2.3.0,<2.4',
-    'sdv==0.9.0',
-    'pyts>=0.9,<0.11',
+    's3fs>=0.2.2',
+    'numpy>=1.18',
+    'pandas>=1.1',
+    'scikit-learn>=0.23.1',
+    'pycaret>=2.3.0',
+    'sdv>=0.9.0',
+    'pyts>=0.9',
 
     # fix conflict
-    'h5py<2.11.0,>=2.10.0',
-    'urllib3!=1.25.0,!=1.25.1,<1.26,>=1.21.1',
-    'matplotlib>=3.3.3, <3.4'
+    'h5py>=2.10.0',
+    'urllib3>=1.21.1',
+    'matplotlib>=3.3.3'
     ]
 
 setup_requires = [

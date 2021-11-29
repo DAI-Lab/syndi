@@ -26,7 +26,7 @@ TODO: Provide a short overview of the project here.
 
 ## Requirements
 
-**syndi-benchmark** has been developed and tested on [Python 3.5, 3.6, 3.7 and 3.8](https://www.python.org/downloads/)
+**syndi-benchmark** has been developed and tested on [Python 3.6 and 3.7](https://www.python.org/downloads/)
 
 Also, although it is not strictly required, the usage of a [virtualenv](https://virtualenv.pypa.io/en/latest/)
 is highly recommended in order to avoid interfering with other software installed in the system
@@ -96,6 +96,13 @@ pyenv local ...
 ```
 Where ... should be versions of python 3.6, 3.7, and 3.8.
 On my mac I used: 3.6.12, 3.7.9, 3.8.12
+
+3.6.15 install:
+```arch -x86_64 pyenv install --patch 3.6.15 <<(curl -sSL https://github.com/python/cpython/commit/8ea6353.patch\?full_index\=1)
+```
+3.7.12 install:
+```pyenv install 3.7.12
+```
 
 # Quickstart
 
