@@ -1,8 +1,8 @@
 .. _sampler:
 
-====
+=======
 Sampler
-====
+=======
 
 Sampler takes a task as input and the corresponding data generator. Sampler uses the data generator to make synthetic data that it concatenates with the training data and returns.
 

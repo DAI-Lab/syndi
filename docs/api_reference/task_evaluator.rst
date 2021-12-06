@@ -1,9 +1,9 @@
-.. _syndi-benchmark.task_evaluator:
+.. _syndi_benchmark.task_evaluator:
 
-syndi-benchmark.task_evaluator
-================
+syndi_benchmark.task_evaluator
+==============================
 
-.. currentmodule:: syndi-benchmark.task_evaluator
+.. currentmodule:: syndi_benchmark.task_evaluator
 
 
 Task Evaluator

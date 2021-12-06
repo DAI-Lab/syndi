@@ -1,9 +1,9 @@
-.. _syndi-benchmark.task:
+.. _task:
 
-syndi-benchmark.task
-================
+syndi_benchmark.task
+====================
 
-.. currentmodule:: syndi-benchmark.task
+.. currentmodule:: syndi_benchmark.task
 
 Task
 ~~~~

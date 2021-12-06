@@ -60,8 +60,12 @@ class Results_Table():
 
 def benchmark(tasks, metrics=None, agnostic_metrics=False,
               output_path='results/', summary_metric="accuracy", is_regression=False):
-    """Run benchmark testing on a set of tasks. Return detailed results of each run stored in a
+    """benchmark function
+    
+    Is the main function of this library that runs benchmark testing
+    on a set of tasks. Return detailed results of each run stored in a
     DataFrame object.
+    
     Args:
         tasks (list):
             a list of task instances storing meta information of each task.
@@ -74,7 +78,6 @@ def benchmark(tasks, metrics=None, agnostic_metrics=False,
             the dir path to store benchmark results and records of each task.
         save_results (boolean):
             whether to store the benchmark results.
-        TODO add regression benchmarking
     Returns:
         pd.DataFrame:
             benchmarking results in detail.

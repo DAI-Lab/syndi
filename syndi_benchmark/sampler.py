@@ -146,20 +146,10 @@ class Sampler():
         return data
 
     def _sample_uniform_regression(self):
-        """
-        convert self.train_data[self.task.target] continuous column into a
+        """Convert self.train_data[self.task.target] continuous column into a
         discrete binned distribution from max to min value of the continuous columns
-
-        then run uniform classification sampling method on it to get the class_to_sample_size
-        (bin_to_sample_size in this case)
-
-        then use uniform_bin_draw iteratively and sample iteratively
-
-        Sample iteration options
-            -sample one at a time with uniform bin range -- too slow
-            -sample a bunch and subselect the ones that are in the right range
-                check what sdv library does -- sometimes all bins mysteriously fail
-            -*manual retry sampling - sample a bunch of elements and only select ones in interval
+        then run retry sampling (sample a bunch of elements and only select ones in interval)
+        to balance the target column using synthetic data.
         """
 
         sampling_method = self.task.sampling_method_id

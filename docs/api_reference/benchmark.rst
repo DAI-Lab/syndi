@@ -1,12 +1,12 @@
-.. _syndi-benchmark.benchmark:
+.. _syndi_benchmark.benchmark:
 
-syndi-benchmark.benchmark
-=====
+syndi_benchmark.benchmark
+=========================
 
-.. currentmodule:: syndi-benchmark.benchmark
+.. currentmodule:: syndi_benchmark.benchmark
 
 Benchmark
-~~~~~
+~~~~~~~~~
 
 .. autosummary::
    :toctree: api/

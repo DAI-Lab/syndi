@@ -1,2 +1,10 @@
-,Task ID,SD Generator Path,Classifier Name,Sampling Method,Run,Status,mae,mse,r2,msle
-0,test_id,regression_generators/TvaeModel.pkl,lr,uniform,0,Status.IMPERFECT,7465.0888671875,85445432.0,0.4271355428900073,
+,Task ID,SD Generator Path,Classifier Name,Sampling Method,Run,Status,auc,f1,recall,precision,accuracy
+0,0_none_baseline_lr_0,generators/default_gaussain_copula.pkl,lr,baseline,0,Status.SUCCESS,0.29333333333333333,0.49483352468427094,0.5166666666666667,0.545045045045045,0.725
+1,1_default_tvae_uniform_lr_0,generators/default_tvae.pkl,lr,uniform,0,Status.IMPERFECT,0.29333333333333333,0.49483352468427094,0.5166666666666667,0.545045045045045,0.725
+2,2_default_gaussain_copula_uniform_lr_0,generators/default_gaussain_copula.pkl,lr,uniform,0,Status.SUCCESS,0.645,0.5054945054945055,0.5333333333333333,0.5252525252525253,0.55
+3,3_default_tvae_original_0_lr_0,generators/default_tvae.pkl,lr,original 20/60,0,Status.SUCCESS,0.2866666666666667,0.49483352468427094,0.5166666666666667,0.545045045045045,0.725
+4,4_default_gaussain_copula_original_0_lr_0,generators/default_gaussain_copula.pkl,lr,original 20/60,0,Status.SUCCESS,0.2833333333333333,0.5098039215686275,0.5333333333333333,0.631578947368421,0.75
+5,5_default_tvae_original_1_lr_0,generators/default_tvae.pkl,lr,original_1,0,Status.RUNNING,,,,,
+6,6_default_gaussain_copula_original_1_lr_0,generators/default_gaussain_copula.pkl,lr,original_1,0,Status.PENDING,,,,,
+7,7_default_tvae_original_2_lr_0,generators/default_tvae.pkl,lr,original_2,0,Status.PENDING,,,,,
+8,8_default_gaussain_copula_original_2_lr_0,generators/default_gaussain_copula.pkl,lr,original_2,0,Status.PENDING,,,,,

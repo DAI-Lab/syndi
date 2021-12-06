@@ -7,7 +7,7 @@ In the following steps we will show a short guide about how to run
 **Syndi-Benchmark** on your dataset
 
 1. Generate Tasks
-----------------
+-----------------
 
 We generate a list of Task objects that allow us to record results for different 
 **Sampling Methods** and **Regression/Classification** models.
@@ -26,7 +26,7 @@ import syndi-benchmark
 The output will be a table that contains two columns `timestamp` and `value`.
 
 2. Benchmark Tasks
--------------------------------
+------------------
 
 Once we have the tasks, we can run them through the benchmarking pipeline to get results.
 

@@ -2,10 +2,11 @@
 Credits
 =======
 
-Development Lead
-----------------
+Development Leads
+-----------------
 
 * Dongyu Liu <dongyu@mit.edu>
+* Nassim Oufattole <nassim@mit.edu>
 
 Contributors
 ------------

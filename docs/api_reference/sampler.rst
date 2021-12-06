@@ -1,9 +1,9 @@
-.. _syndi-benchmark.sampler:
+.. _syndi_benchmark.sampler:
 
-syndi-benchmark.sampler
-=======
+syndi_benchmark.sampler
+=======================
 
-.. currentmodule:: syndi-benchmark.sampler
+.. currentmodule:: syndi_benchmark.sampler
 
 Sampler
 ~~~~~~~

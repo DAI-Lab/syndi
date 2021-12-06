@@ -4,7 +4,7 @@
 # You can set these variables from the command line.
 SPHINXOPTS    =
 SPHINXBUILD   = python -msphinx
-SPHINXPROJ    = syndi_benchmark
+SPHINXPROJ    = syndi-benchmark
 SOURCEDIR     = .
 BUILDDIR      = _build
 

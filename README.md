@@ -84,25 +84,15 @@ pyenv installation support can be found [here](https://stackoverflow.com/questio
 
 Use the following pyenv [documentation](https://github.com/pyenv/pyenv#basic-github-checkout) for setting up pyenv
 
-add the following line to your ~/.bashrc or ~/.zshrc directory
-```alias pyenv='CFLAGS="-I$(brew --prefix openssl)/include" LDFLAGS="-L$(brew --prefix openssl)/lib" pyenv'
-```
-
 Setting up tox:
 ```
 pip install tox tox-pyenv
 pyenv install ...
 pyenv local ...
 ```
-Where ... should be versions of python 3.6, 3.7, and 3.8.
-On my mac I used: 3.6.12, 3.7.9, 3.8.12
+Where ... should be versions of python 3.6, 3.7
 
-3.6.15 install:
-```arch -x86_64 pyenv install --patch 3.6.15 <<(curl -sSL https://github.com/python/cpython/commit/8ea6353.patch\?full_index\=1)
-```
-3.7.12 install:
-```pyenv install 3.7.12
-```
+
 
 # Quickstart
 
