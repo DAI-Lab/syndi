@@ -3,7 +3,7 @@
 API Reference
 =============
 
-In this section you will find a detailed specification of all the public functions and classes in Syndi-Benchmark.
+In this section you will find a detailed specification of all the public functions and classes in syndi.
 
 .. toctree::
    :maxdepth: 2

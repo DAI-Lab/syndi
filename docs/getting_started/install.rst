@@ -10,7 +10,7 @@ Requirements
 
 Python
 ~~~~~~
-**Syndi-Benchmark** has been tested on **GNU/Linux**, and **macOS** systems running `Python 3.6, and 3.7`_ installed.
+**syndi** has been tested on **GNU/Linux**, and **macOS** systems running `Python 3.6, and 3.7`_ installed.
 
 Also, although it is not strictly required, the usage of a `virtualenv`_ is highly recommended in
 order to avoid having conflicts with other software installed in the system where you are trying to run **Orion**.
@@ -19,18 +19,18 @@ order to avoid having conflicts with other software installed in the system wher
 Install using pip
 -----------------
 
-The easiest and recommended way to install **Syndi-Benchmark** is using `pip`_:
+The easiest and recommended way to install **syndi** is using `pip`_:
 
 .. code-block:: console
 
-    pip install syndi-benchmark
+    pip install syndi
 
 This will pull and install the latest stable release from `PyPI`_.
 
 Install from source
 -------------------
 
-The source code of **Syndi-Benchmark** can be downloaded from the `Github repository`_
+The source code of **syndi** can be downloaded from the `Github repository`_
 
 You can clone the repository and install with the following command in your terminal:
 
@@ -39,14 +39,14 @@ You can clone the repository and install it from source by running ``make instal
 
 .. code-block:: console
 
-    git clone git://github.com/DAI-Lab/syndi-benchmark
-    cd syndi-benchmark
+    git clone git://github.com/DAI-Lab/syndi
+    cd syndi
     git checkout stable
     make install
 
-.. note:: The ``master`` branch of the Syndi-Benchmark repository contains the latest development version. If you want to install the latest stable version, make sure not to omit the ``git checkout stable`` indicated above.
+.. note:: The ``master`` branch of the syndi repository contains the latest development version. If you want to install the latest stable version, make sure not to omit the ``git checkout stable`` indicated above.
 
-If you are installing **Syndi-Benchmark** in order to modify its code, the installation must be done
+If you are installing **syndi** in order to modify its code, the installation must be done
 from its sources, in the editable mode, and also including some additional dependencies in
 order to be able to run the tests and build the documentation. Instructions about this process
 can be found in the :ref:`contributing` guide.

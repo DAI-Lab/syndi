@@ -39,12 +39,12 @@ install-test: clean-build clean-pyc ## install the package and test dependencies
 
 .PHONY: test
 test: ## run tests quickly with the default Python
-	python -m pytest --cov=syndi_benchmark --cov-report xml
+	python -m pytest --cov=syndi --cov-report xml
 
 .PHONY: lint
 lint: ## check style with flake8 and isort
-	flake8 syndi_benchmark tests
-	isort -c --recursive syndi_benchmark tests
+	flake8 syndi tests
+	isort -c --recursive syndi tests
 
 .PHONY: install-develop
 install-develop: clean-build clean-pyc ## install the package in editable mode and dependencies for development
@@ -56,13 +56,13 @@ test-all: ## run tests on every Python version with tox
 
 .PHONY: fix-lint
 fix-lint: ## fix lint issues using autoflake, autopep8, and isort
-	find syndi_benchmark tests -name '*.py' | xargs autoflake --in-place --remove-all-unused-imports --remove-unused-variables
-	autopep8 --in-place --recursive --aggressive syndi_benchmark tests
-	isort --apply --atomic --recursive syndi_benchmark tests
+	find syndi tests -name '*.py' | xargs autoflake --in-place --remove-all-unused-imports --remove-unused-variables
+	autopep8 --in-place --recursive --aggressive syndi tests
+	isort --apply --atomic --recursive syndi tests
 
 .PHONY: coverage
 coverage: ## check code coverage quickly with the default Python
-	coverage run --source syndi_benchmark -m pytest
+	coverage run --source syndi -m pytest
 	coverage report -m
 	coverage html
 	$(BROWSER) htmlcov/index.html

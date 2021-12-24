@@ -4,7 +4,7 @@ Quickstart
 ==========
 
 In the following steps we will show a short guide about how to run 
-**Syndi-Benchmark** on your dataset
+**syndi** on your dataset
 
 1. Generate Tasks
 -----------------
@@ -19,7 +19,7 @@ To do so, we need to import the `train_df` and `test_df` dataframes.
 
 	print(10*10)
 
-import syndi-benchmark
+import syndi
 
    
 

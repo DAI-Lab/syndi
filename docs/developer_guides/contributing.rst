@@ -38,8 +38,8 @@ and "help wanted" is open to whoever wants to implement it.
 Write Documentation
 ~~~~~~~~~~~~~~~~~~~
 
-Syndi-Benchmark could always use more documentation, whether as part of the
-official Syndi-Benchmark docs, in docstrings, or even on the web in blog posts,
+syndi could always use more documentation, whether as part of the
+official syndi docs, in docstrings, or even on the web in blog posts,
 articles, and such.
 
 Submit Feedback
@@ -57,18 +57,18 @@ If you are proposing a feature:
 Get Started!
 ------------
 
-Ready to contribute? Here's how to set up `Syndi-Benchmark` for local development.
+Ready to contribute? Here's how to set up `syndi` for local development.
 
-1. Fork the `Syndi-Benchmark` repo on GitHub.
+1. Fork the `syndi` repo on GitHub.
 2. Clone your fork locally::
 
-    $ git clone git@github.com:your_name_here/Syndi-Benchmark.git
+    $ git clone git@github.com:your_name_here/syndi.git
 
 3. Install your local copy into a virtualenv. Assuming you have virtualenvwrapper installed,
    this is how you set up your fork for local development::
 
-    $ mkvirtualenv Syndi-Benchmark
-    $ cd Syndi-Benchmark/
+    $ mkvirtualenv syndi
+    $ cd syndi/
     $ make install-develop
 
 4. Create a branch for local development::
@@ -133,9 +133,9 @@ All the Unit Tests should comply with the following requirements:
 
 1. Unit Tests should be based only in unittest and pytest modules.
 
-2. The tests that cover a module called ``syndi-benchmark/path/to/a_module.py``
+2. The tests that cover a module called ``syndi/path/to/a_module.py``
    should be implemented in a separated module called
-   ``tests/syndi-benchmark/path/to/test_a_module.py``.
+   ``tests/syndi/path/to/test_a_module.py``.
    Note that the module name has the ``test_`` prefix and is located in a path similar
    to the one of the tested module, just inside the ``tests`` folder.
 
@@ -175,11 +175,11 @@ The process of releasing a new version involves several steps combining both ``g
 ``bumpversion`` which, briefly:
 
 1. Merge what is in ``master`` branch into ``stable`` branch.
-2. Update the version in ``setup.cfg``, ``syndi-benchmark/__init__.py`` and
+2. Update the version in ``setup.cfg``, ``syndi/__init__.py`` and
    ``HISTORY.md`` files.
 3. Create a new git tag pointing at the corresponding commit in ``stable`` branch.
 4. Merge the new commit from ``stable`` into ``master``.
-5. Update the version in ``setup.cfg`` and ``syndi-benchmark/__init__.py``
+5. Update the version in ``setup.cfg`` and ``syndi/__init__.py``
    to open the next development iteration.
 
 .. note:: Before starting the process, make sure that ``HISTORY.md`` has been updated with a new
@@ -201,6 +201,6 @@ Once this is done, run of the following commands:
 
     make release-major
 
-.. _GitHub issues page: https://github.com/DAI-Lab/syndi-benchmark/issues
-.. _GitHub Actions Status page: https://github.com/DAI-Lab/syndi-benchmark/actions
+.. _GitHub issues page: https://github.com/DAI-Lab/syndi/issues
+.. _GitHub Actions Status page: https://github.com/DAI-Lab/syndi/actions
 .. _Google docstrings style: https://google.github.io/styleguide/pyguide.html?showone=Comments#Comments

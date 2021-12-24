@@ -1,4 +1,4 @@
-* syndi-benchmark version:
+* syndi version:
 * Python version:
 * Operating System:
 

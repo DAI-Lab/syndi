@@ -1,18 +1,18 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""Tests for `syndi_benchmark` package."""
+"""Tests for `syndi` package."""
 
 import unittest
 
 from click.testing import CliRunner
 
-# from syndi_benchmark import syndi_benchmark
-from syndi_benchmark import cli
+# from syndi import syndi
+from syndi import cli
 
 
-class TestSyndi_benchmark(unittest.TestCase):
-    """Tests for `syndi_benchmark` package."""
+class Testsyndi(unittest.TestCase):
+    """Tests for `syndi` package."""
 
     def setUp(self):
         """Set up test fixtures, if any."""
@@ -29,7 +29,7 @@ class TestSyndi_benchmark(unittest.TestCase):
         runner = CliRunner()
         result = runner.invoke(cli.main)
         assert result.exit_code == 0
-        assert 'syndi_benchmark.cli.main' in result.output
+        assert 'syndi.cli.main' in result.output
         help_result = runner.invoke(cli.main, ['--help'])
         assert help_result.exit_code == 0
         assert '--help  Show this message and exit.' in help_result.output

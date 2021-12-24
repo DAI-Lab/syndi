@@ -3,7 +3,7 @@
 User Guides
 ===========
 
-The User Guides section covers different topics about Syndi-Benchmark usage:
+The User Guides section covers different topics about syndi usage:
 
 .. toctree::
     :maxdepth: 3

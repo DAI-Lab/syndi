@@ -7,8 +7,8 @@ import pytest
 import sdv.sdv
 from sdv.tabular import GaussianCopula
 
-from syndi_benchmark.sampler import Sampler
-from syndi_benchmark.task import Task
+from syndi.sampler import Sampler
+from syndi.task import Task
 
 
 @pytest.mark.usefixtures("change_test_dir")

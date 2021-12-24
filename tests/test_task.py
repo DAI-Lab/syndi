@@ -5,7 +5,7 @@ import unittest
 
 import pytest
 
-import syndi_benchmark.task as task
+import syndi.task as task
 
 _BASE_PATH = os.path.abspath(os.path.dirname(__file__))
 

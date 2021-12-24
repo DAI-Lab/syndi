@@ -1,9 +1,9 @@
-.. _syndi_benchmark.benchmark:
+.. _syndi.benchmark:
 
-syndi_benchmark.benchmark
+syndi.benchmark
 =========================
 
-.. currentmodule:: syndi_benchmark.benchmark
+.. currentmodule:: syndi.benchmark
 
 Benchmark
 ~~~~~~~~~

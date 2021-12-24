@@ -5,8 +5,8 @@ import numpy as np
 import pandas as pd
 import pytest
 
-import syndi_benchmark.benchmark as benchmark
-import syndi_benchmark.task as task
+import syndi.benchmark as benchmark
+import syndi.task as task
 
 
 @pytest.mark.usefixtures("change_test_dir")

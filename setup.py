@@ -85,7 +85,7 @@ setup(
     description='e2e pipeline to generate synthetic data for empowering machine learning models',
     entry_points={
         'console_scripts': [
-            'syndi-benchmark=syndi_benchmark.cli:main',
+            'syndi=syndi.cli:main',
         ],
     },
     extras_require={
@@ -98,14 +98,14 @@ setup(
     long_description=readme + '\n\n' + history,
     long_description_content_type='text/markdown',
     include_package_data=True,
-    keywords='syndi_benchmark syndi-benchmark syndi-benchmark',
-    name='syndi-benchmark',
-    packages=find_packages(include=['syndi_benchmark', 'syndi_benchmark.*']),
+    keywords='syndi syndi syndi',
+    name='syndi',
+    packages=find_packages(include=['syndi', 'syndi.*']),
     python_requires='>=3.6',
     setup_requires=setup_requires,
     test_suite='tests',
     tests_require=tests_require,
-    url='https://github.com/DAI-Lab/syndi-benchmark',
+    url='https://github.com/DAI-Lab/syndi',
     version='0.1.0.dev0',
     zip_safe=False,
 )

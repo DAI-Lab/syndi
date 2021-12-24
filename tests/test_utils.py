@@ -4,7 +4,7 @@ import unittest
 import pandas as pd
 import pytest
 
-import syndi_benchmark.utils as utils
+import syndi.utils as utils
 
 
 @pytest.mark.usefixtures("change_test_dir")
