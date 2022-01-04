@@ -1,7 +1,7 @@
 ,Task ID,SD Generator Path,Classifier Name,Sampling Method,Run,Status,auc,f1,recall,precision,accuracy
-3,3_default_gaussain_copula_original_0_lr_0,generators/default_gaussain_copula.pkl,lr,original 20/60,0,Status.SUCCESS,0.47058823529411764,0.45945945945945943,0.5,0.425,0.85
-4,4_default_tvae_original_0_lr_0,generators/default_tvae.pkl,lr,original 20/60,0,Status.SUCCESS,0.392156862745098,0.45945945945945943,0.5,0.425,0.85
-5,5_default_gaussain_copula_original_1_lr_0,generators/default_gaussain_copula.pkl,lr,original 40/60,0,Status.SUCCESS,0.40686274509803916,0.45945945945945943,0.5,0.425,0.85
-6,6_default_tvae_original_1_lr_0,generators/default_tvae.pkl,lr,original 40/60,0,Status.SUCCESS,0.37499999999999994,0.45945945945945943,0.5,0.425,0.85
-7,7_default_gaussain_copula_original_2_lr_0,generators/default_gaussain_copula.pkl,lr,original 60/60,0,Status.SUCCESS,0.33333333333333337,0.45945945945945943,0.5,0.425,0.85
-8,8_default_tvae_original_2_lr_0,generators/default_tvae.pkl,lr,original 60/60,0,Status.SUCCESS,0.392156862745098,0.45945945945945943,0.5,0.425,0.85
+3,3_default_gaussain_copula_original_0_lr_0,generators/default_gaussain_copula.pkl,lr,original 20/60,0,Status.SUCCESS,0.33766233766233766,0.4520547945205479,0.5,0.4125,0.825
+4,4_default_tvae_original_0_lr_0,generators/default_tvae.pkl,lr,original 20/60,0,Status.SUCCESS,0.3246753246753247,0.4520547945205479,0.5,0.4125,0.825
+5,5_default_gaussain_copula_original_1_lr_0,generators/default_gaussain_copula.pkl,lr,original 40/60,0,Status.SUCCESS,0.3116883116883117,0.4520547945205479,0.5,0.4125,0.825
+6,6_default_tvae_original_1_lr_0,generators/default_tvae.pkl,lr,original 40/60,0,Status.SUCCESS,0.35064935064935066,0.4520547945205479,0.5,0.4125,0.825
+7,7_default_gaussain_copula_original_2_lr_0,generators/default_gaussain_copula.pkl,lr,original 60/60,0,Status.SUCCESS,0.49350649350649345,0.4520547945205479,0.5,0.4125,0.825
+8,8_default_tvae_original_2_lr_0,generators/default_tvae.pkl,lr,original 60/60,0,Status.SUCCESS,0.3939393939393939,0.4520547945205479,0.5,0.4125,0.825

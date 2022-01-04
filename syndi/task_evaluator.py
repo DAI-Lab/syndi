@@ -3,12 +3,13 @@ import os
 import pandas as pd  # Basic data manipulation
 import sdv.sdv
 import sklearn
+import numpy as np
 from pycaret import classification, regression
 
 from syndi.sampler import Sampler
 
 CLASSIFICATION_METRICS = ['auc', 'f1', 'recall', 'precision', 'accuracy']
-REGRESSION_METRICS = ["mae", "mse", "r2", "msle"]
+REGRESSION_METRICS = ["mae", "mse", "r2", "msle", "gini"]
 
 
 class Task_Evaluator():
@@ -71,7 +72,7 @@ class Task_Evaluator():
             return self._get_classification_scores(ground_truth, predictions, scores)
 
     @classmethod
-    def _get_classification_scores(self, ground_truth, classifier_predictions, classifier_score):
+    def _get_classification_scores(cls, ground_truth, classifier_predictions, classifier_score):
         labels = sorted(ground_truth.unique())
 
         precision_avg, recall_avg, f1_avg, _ = sklearn.metrics.precision_recall_fscore_support(
@@ -95,9 +96,27 @@ class Task_Evaluator():
         # support = convert_labels_lists_to_dict(support)
 
         return [auc, f1, recall, precision, accuracy, support]
+    @classmethod
+    def calculate_gini(cls, x):
+        """
+        input: nx2 array
+        output: gini coefficient
+
+        Notes:
+        (Warning: This is a concise implementation, but it is O(n**2)
+        in time and memory, where n = len(x).  *Don't* pass in huge
+        samples!)
+        """
+        # Mean absolute difference
+        mad = np.abs(np.subtract.outer(x, x)).mean()
+        # Relative mean absolute difference
+        rmad = mad/np.mean(x)
+        # Gini coefficient
+        g = 0.5 * rmad
+        return g
 
     @classmethod
-    def _get_regression_scores(self, ground_truth, predictions, classifier_score):
+    def _get_regression_scores(cls, ground_truth, predictions, classifier_score):
         mae = sklearn.metrics.mean_absolute_error(ground_truth, predictions)
         mse = sklearn.metrics.mean_squared_error(ground_truth, predictions)
         r2 = sklearn.metrics.r2_score(ground_truth, predictions)
@@ -106,7 +125,9 @@ class Task_Evaluator():
             msle = sklearn.metrics.mean_squared_log_error(ground_truth, predictions)
         except ValueError:
             pass
-        return [mae, mse, r2, msle]
+        gini_input = np.hstack([ground_truth, predictions])
+        gini = Task_Evaluator.calculate_gini(gini_input)
+        return [mae, mse, r2, msle, gini]
 
     def _store_classifier(self, classifier_model):
         task_output_dir = self.task.output_dir
