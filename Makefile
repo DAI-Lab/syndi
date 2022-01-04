@@ -37,9 +37,9 @@ install: clean-build clean-pyc ## install the package to the active Python's sit
 install-test: clean-build clean-pyc ## install the package and test dependencies
 	pip install .[test]
 
-.PHONY: test
-test: ## run tests quickly with the default Python
-	python -m pytest --cov=syndi --cov-report xml
+.PHONY: test #-k test_benchmark_classification
+test: ## run tests quickly with the default Python - -k 'test_benchmark_classification'
+	python -m pytest --cov=syndi --cov-report xml 
 
 .PHONY: lint
 lint: ## check style with flake8 and isort
