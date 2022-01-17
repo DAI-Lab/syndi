@@ -1,6 +1,7 @@
 import os
 import shutil
 import unittest
+import pandas as pd
 
 import pytest
 
@@ -115,6 +116,46 @@ class TestTaskEvaluator(unittest.TestCase):
                               sampling_method_id="uniform", pycaret_model="lr", run_num=0,
                               is_regression=True)
         evaluator = task_evaluator.Task_Evaluator(test_task)
+        evaluator.evaluate_task()
+    
+    def test_uniform_regression_preprocess(self):
+        path_to_generator = "generators/default_gaussain_copula.pkl"
+        test_task = task.Task(task_id="36_none_baseline_lr_0", train_dataset="data/train.csv",
+                              test_dataset="data/test.csv", target="lr",
+                              path_to_generator=path_to_generator,
+                              sampling_method_id="uniform", pycaret_model="lr", run_num=0,
+                              is_regression=True)
+        def preprocess_fn(df):
+            # drop useless columns after calc stats
+            df = df.drop(['Unnamed: 0'], axis=1)
+
+            def compute_loss_ratio(df):
+                df = df.copy(deep=True)
+                # Numeric columns: replace NAN with 0
+                columns = df.columns
+                numeric_cols = columns[df.dtypes == np.float64]
+                for col in numeric_cols:
+                    df[col] = df[col].fillna(0.0)
+
+                # Calculate Loss Ratio - LR
+                company_payout = df['Age'].to_numpy()
+                company_payin = df['DistanceFromHome'].to_numpy()
+                lr = company_payout / company_payin
+                df['lr'] = lr
+
+                # Drop out original target columns
+                df = df.drop(['Age', 'DistanceFromHome'], axis=1).reset_index(drop=True)
+
+                return df
+
+            df = compute_loss_ratio(df)
+            return df
+        train_df = pd.read_csv("data/train.csv")
+        # ['Unnamed: 0', 'Unnamed: 0.1', 'Age', 'DistanceFromHome', 'Attrition']
+        # print("######################################")
+        # print(train_df.columns)
+        # print(train_df.head())
+        evaluator = task_evaluator.Task_Evaluator(test_task, preprocess_fn=preprocess_fn)
         evaluator.evaluate_task()
 
     def test_uniform_regression_all_state_dataset(self):

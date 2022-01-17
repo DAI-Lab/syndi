@@ -13,12 +13,13 @@ REGRESSION_METRICS = ["mae", "mse", "r2", "msle", "gini"]
 
 
 class Task_Evaluator():
-    def __init__(self, task):
+    def __init__(self, task, preprocess_fn=None):
         self.task = task
         self.train_data = pd.read_csv(task.train_dataset)
         self.test_data = pd.read_csv(task.test_dataset)
         generator = sdv.sdv.SDV.load(task.path_to_generator)
         self.sampler = Sampler(task, self.train_data, generator)
+        self.preprocess_fn = preprocess_fn
 
     def evaluate_task(self, metrics=None):
         """Run benchmark testing on a task. Save intermedia data, trained models, and optimized
@@ -43,7 +44,10 @@ class Task_Evaluator():
             metrics = all_metrics
 
         combined_data, sampling_method_info, score_aggregate = self.sampler.sample_data()
-
+        if self.preprocess_fn:
+            combined_data = self.preprocess_fn(combined_data)
+            self.test_data = self.preprocess_fn(self.test_data)
+        
         predictions = self._regression(
             combined_data) if self.task.is_regression else self._classify(combined_data)
         ground_truth = predictions[self.task.target]
@@ -99,23 +103,13 @@ class Task_Evaluator():
 
         return [auc, f1, recall, precision, accuracy, support]
     @classmethod
-    def calculate_gini(cls, x):
-        """
-        input: nx2 array
-        output: gini coefficient
-
-        Notes:
-        (Warning: This is a concise implementation, but it is O(n**2)
-        in time and memory, where n = len(x).  *Don't* pass in huge
-        samples!)
-        """
-        # Mean absolute difference
-        mad = np.abs(np.subtract.outer(x, x)).mean()
-        # Relative mean absolute difference
-        rmad = mad/np.mean(x)
-        # Gini coefficient
-        g = 0.5 * rmad
-        return g
+    def calculate_gini(cls, ground_truth, predictions):# TODO
+        x = np.abs(np.subtract(ground_truth, predictions))
+        sorted_x = np.sort(x)
+        n = len(x)
+        cumx = np.cumsum(sorted_x, dtype=float)
+        # The above formula, with all weights equal to 1 simplifies to:
+        return (n + 1 - 2 * np.sum(cumx) / cumx[-1]) / n
 
     @classmethod
     def _get_regression_scores(cls, ground_truth, predictions, classifier_score):
@@ -127,8 +121,8 @@ class Task_Evaluator():
             msle = sklearn.metrics.mean_squared_log_error(ground_truth, predictions)
         except ValueError:
             pass
-        gini_input = np.hstack([ground_truth, predictions])
-        gini = Task_Evaluator.calculate_gini(gini_input)
+        # gini_input = np.hstack([ground_truth, predictions])
+        gini = Task_Evaluator.calculate_gini(ground_truth, predictions)
         return [mae, mse, r2, msle, gini]
 
     def _store_classifier(self, classifier_model):

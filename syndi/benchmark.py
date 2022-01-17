@@ -62,7 +62,8 @@ class Results_Table():
 
 
 def benchmark(tasks, metrics=None, agnostic_metrics=False,
-              output_path='results/', summary_metric="accuracy", is_regression=False):
+              output_path='results/', summary_metric="accuracy", is_regression=False,
+              preprocess_fn=None):
     """benchmark function
     
     Is the main function of this library that runs benchmark testing
@@ -95,7 +96,7 @@ def benchmark(tasks, metrics=None, agnostic_metrics=False,
         start_time = time.time()
         
         results_table.update_row_status(task.task_id, Status.RUNNING)
-        evaluator = task_evaluator.Task_Evaluator(task)
+        evaluator = task_evaluator.Task_Evaluator(task, preprocess_fn)
         row = None
         try:
             row = evaluator.evaluate_task(metrics=metrics)
