@@ -1,6 +1,7 @@
 import os
 import traceback
 from enum import Enum
+import time
 
 import numpy as np
 import pandas as pd  # Basic data manipulation
@@ -13,7 +14,9 @@ ID_COLUMNS = [
     "Classifier Name",
     "Sampling Method",
     "Run",
-    "Status"]
+    "Time",
+    "Status",
+]
 
 
 class Status(Enum):
@@ -34,7 +37,7 @@ class Results_Table():
         self.columns = columns
         results = [[task.task_id, task.path_to_generator, task.pycaret_model,
                     task.sampling_method_id, task.run_num,
-                    Status.PENDING] + [np.nan] * len(metrics) for task in tasks]
+                    Status.PENDING] + [np.nan] * (len(metrics)+1) for task in tasks]
         result_df = pd.DataFrame(results, columns=columns)
         self.result_df = result_df
         self.output_path = os.path.join(output_dir, 'results.csv') if output_dir else None
@@ -89,6 +92,8 @@ def benchmark(tasks, metrics=None, agnostic_metrics=False,
     results_table = None
     results_table = Results_Table(output_path, tasks, metrics)
     for task in tasks:
+        start_time = time.time()
+        
         results_table.update_row_status(task.task_id, Status.RUNNING)
         evaluator = task_evaluator.Task_Evaluator(task)
         row = None
@@ -107,7 +112,11 @@ def benchmark(tasks, metrics=None, agnostic_metrics=False,
             status = Status.IMPERFECT
         if row is not None:
             center = len(ID_COLUMNS) - 1
-            results_table.update_row(row[:center] + [status] + row[center:])
+            #calculate runtime
+            end_time = time.time()
+            total_time = end_time - start_time
+            #add result
+            results_table.update_row(row[:center] + [status] +[total_time] + row[center:])
 
     # columns = ID_COLUMNS + metrics
     # result_df = pd.DataFrame.from_records(results, columns=columns)

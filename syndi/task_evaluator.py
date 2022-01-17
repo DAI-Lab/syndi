@@ -52,14 +52,16 @@ class Task_Evaluator():
         if "Score" in predictions.columns:
             output_score = predictions["Score"]
         scores = self._get_scores(ground_truth, output_predictions, output_score)
+        
         # make dictionary of metric name to score
-
         metric_to_score = {metric: score for metric, score in zip(all_metrics, scores)}
+        
         # record entry
         row = [self.task.task_id, self.task.path_to_generator, self.task.pycaret_model,
                sampling_method_info, self.task.run_num]
         for metric in metrics:
             row += [metric_to_score[metric]]  # TODO change to append
+        
         return row
 
     def get_sampler_logs(self):

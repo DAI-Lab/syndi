@@ -11,7 +11,7 @@ _BASE_PATH = os.path.abspath(os.path.dirname(__file__))
 
 
 @pytest.mark.usefixtures("change_test_dir")
-class TestTaskEvauator(unittest.TestCase):
+class TestTaskEvaluator(unittest.TestCase):
     def setUp(self):
         # output directory setup
         output_dir = "tasks"

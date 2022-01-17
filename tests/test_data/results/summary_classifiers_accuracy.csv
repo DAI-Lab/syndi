@@ -1,7 +1,6 @@
-,Task ID,SD Generator Path,Classifier Name,Sampling Method,Run,Status,auc,f1,recall,precision,accuracy
-3,3_default_gaussain_copula_original_0_lr_0,generators/default_gaussain_copula.pkl,lr,original 20/60,0,Status.SUCCESS,0.33766233766233766,0.4520547945205479,0.5,0.4125,0.825
-4,4_default_tvae_original_0_lr_0,generators/default_tvae.pkl,lr,original 20/60,0,Status.SUCCESS,0.3246753246753247,0.4520547945205479,0.5,0.4125,0.825
-5,5_default_gaussain_copula_original_1_lr_0,generators/default_gaussain_copula.pkl,lr,original 40/60,0,Status.SUCCESS,0.3116883116883117,0.4520547945205479,0.5,0.4125,0.825
-6,6_default_tvae_original_1_lr_0,generators/default_tvae.pkl,lr,original 40/60,0,Status.SUCCESS,0.35064935064935066,0.4520547945205479,0.5,0.4125,0.825
-7,7_default_gaussain_copula_original_2_lr_0,generators/default_gaussain_copula.pkl,lr,original 60/60,0,Status.SUCCESS,0.49350649350649345,0.4520547945205479,0.5,0.4125,0.825
-8,8_default_tvae_original_2_lr_0,generators/default_tvae.pkl,lr,original 60/60,0,Status.SUCCESS,0.3939393939393939,0.4520547945205479,0.5,0.4125,0.825
+,Task ID,SD Generator Path,Classifier Name,Sampling Method,Run,Time,Status,auc,f1,recall,precision,accuracy
+0,0_none_baseline_lr_0,generators/default_gaussain_copula.pkl,lr,baseline,0,0.4571428571428572,Status.SUCCESS,7.274961709976196,0.4666666666666667,0.5,0.4375,0.875
+3,3_default_tvae_original_0_lr_0,generators/default_tvae.pkl,lr,original 20/60,0,0.4971428571428572,Status.SUCCESS,1.5292308330535889,0.4666666666666667,0.5,0.4375,0.875
+4,4_default_gaussain_copula_original_0_lr_0,generators/default_gaussain_copula.pkl,lr,original 20/60,0,0.4742857142857143,Status.SUCCESS,1.5435726642608643,0.4666666666666667,0.5,0.4375,0.875
+5,5_default_tvae_original_1_lr_0,generators/default_tvae.pkl,lr,original 40/60,0,0.4571428571428572,Status.SUCCESS,1.5507473945617676,0.4666666666666667,0.5,0.4375,0.875
+7,7_default_tvae_original_2_lr_0,generators/default_tvae.pkl,lr,original 60/60,0,0.5057142857142858,Status.SUCCESS,1.5527522563934326,0.4666666666666667,0.5,0.4375,0.875
