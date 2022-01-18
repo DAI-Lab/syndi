@@ -79,16 +79,16 @@ class Sampler():
         #         intervals.append(pd.Interval(left=left, right=right))
         # else:
         target_category_frequencies = data[target].value_counts().to_dict()
-        print("in function")
-        print(target_category_frequencies)
+        # print("in function")
+        # print(target_category_frequencies)
         largest_target = data[target].value_counts().nlargest(
             n=1).values[0]  # get largest target category
         class_to_sample_size = {}
         for class_name in target_category_frequencies:
             sample_size = largest_target - target_category_frequencies[class_name]
             class_to_sample_size[class_name] = sample_size
-        print(class_to_sample_size)
-        print("out function")
+        # print(class_to_sample_size)
+        # print("out function")
         return class_to_sample_size
 
     def _sample_uniform_classification(self):
@@ -191,7 +191,9 @@ class Sampler():
             rows.append(data)
         synthetic_data = pd.concat(rows)
         processed_data = self.preprocess_fn(self.train_data) if self.preprocess_fn else self.train_data
-        assert(self.train_data.dtypes.to_list() == synthetic_data.dtypes.to_list())
+        # print(self.train_data.dtypes.to_list())
+        # print(synthetic_data.dtypes.to_list())
+        #assert(self.train_data.dtypes.to_list() == synthetic_data.dtypes.to_list())
         score_aggregate = evaluate(synthetic_data, self.train_data, aggregate=True)
         return synthetic_data, sampling_method, score_aggregate
 

@@ -1,8 +1,7 @@
 ,Task ID,SD Generator Path,Classifier Name,Sampling Method,Run,Time,Status,auc,f1,recall,precision,accuracy
-0,0_none_baseline_lr_0,generators/default_gaussain_copula.pkl,lr,baseline,0,0.4571428571428572,Status.SUCCESS,7.296797275543213,0.4666666666666667,0.5,0.4375,0.875
-3,3_default_tvae_original_0_lr_0,generators/default_tvae.pkl,lr,original 20/60,0,0.47428571428571425,Status.SUCCESS,1.5380127429962158,0.4666666666666667,0.5,0.4375,0.875
-4,4_default_gaussain_copula_original_0_lr_0,generators/default_gaussain_copula.pkl,lr,original 20/60,0,0.44571428571428573,Status.SUCCESS,1.5646662712097168,0.4666666666666667,0.5,0.4375,0.875
-5,5_default_tvae_original_1_lr_0,generators/default_tvae.pkl,lr,original 40/60,0,0.48857142857142855,Status.SUCCESS,1.538478136062622,0.4666666666666667,0.5,0.4375,0.875
-6,6_default_gaussain_copula_original_1_lr_0,generators/default_gaussain_copula.pkl,lr,original 40/60,0,0.49142857142857144,Status.SUCCESS,1.5606725215911865,0.6086105675146771,0.5857142857142857,0.6973684210526316,0.875
-7,7_default_tvae_original_2_lr_0,generators/default_tvae.pkl,lr,original 60/60,0,0.5028571428571429,Status.SUCCESS,1.5382249355316162,0.4666666666666667,0.5,0.4375,0.875
-1,1_default_tvae_uniform_lr_0,generators/default_tvae.pkl,lr,uniform,0,0.4285714285714286,Status.SUCCESS,5.189764499664307,0.5144724556489263,0.5571428571428572,0.5297619047619048,0.675
+0,0_none_baseline_lr_0,generators/default_gaussain_copula.pkl,lr,baseline,0,7.418895721435547,Status.SUCCESS,0.4571428571428572,0.4666666666666667,0.5,0.4375,0.875
+3,3_default_tvae_original_0_lr_0,generators/default_tvae.pkl,lr,original 20/60,0,1.5717062950134277,Status.SUCCESS,0.4742857142857143,0.4666666666666667,0.5,0.4375,0.875
+5,5_default_tvae_original_1_lr_0,generators/default_tvae.pkl,lr,original 40/60,0,1.5636703968048096,Status.SUCCESS,0.46285714285714286,0.4666666666666667,0.5,0.4375,0.875
+7,7_default_tvae_original_2_lr_0,generators/default_tvae.pkl,lr,original 60/60,0,1.5630056858062744,Status.SUCCESS,0.48000000000000004,0.4666666666666667,0.5,0.4375,0.875
+8,8_default_gaussain_copula_original_2_lr_0,generators/default_gaussain_copula.pkl,lr,original 60/60,0,1.5844345092773438,Status.SUCCESS,0.44571428571428573,0.4666666666666667,0.5,0.4375,0.875
+1,1_default_tvae_uniform_lr_0,generators/default_tvae.pkl,lr,uniform,0,7.721899509429932,Status.SUCCESS,0.44571428571428573,0.5144724556489263,0.5571428571428572,0.5297619047619048,0.675
