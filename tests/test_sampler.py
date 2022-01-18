@@ -3,6 +3,7 @@ import shutil
 import unittest
 
 import pandas as pd
+import numpy as np
 import pytest
 import sdv.sdv
 from sdv.tabular import GaussianCopula
@@ -126,6 +127,46 @@ class TestSampler(unittest.TestCase):
         combined_data, sampling_method_info, score_aggregate = sampler.sample_data()
         copy_combined = combined_data.copy()
         copy_combined["Age"] = pd.cut(x=copy_combined["Age"], bins=5)
+        for value in sampler._get_class_to_sample_size(copy_combined).values():
+            self.assertEqual(value, 0)
+        
+    def test_sample_uniform_regression_preprocess(self):
+        def preprocess_fn(df):
+            # drop useless columns after calc stats
+            df = df.drop(['Unnamed: 0'], axis=1)
+
+            def compute_loss_ratio(df):
+                df = df.copy(deep=True)
+                # Numeric columns: replace NAN with 0
+                columns = df.columns
+                numeric_cols = columns[df.dtypes == np.float64]
+                for col in numeric_cols:
+                    df[col] = df[col].fillna(0.0)
+
+                # Calculate Loss Ratio - LR
+                company_payout = df['Age'].to_numpy()
+                company_payin = df['DistanceFromHome'].to_numpy()
+                lr = company_payout / company_payin
+                df['lr'] = lr
+
+                # Drop out original target columns
+                df = df.drop(['Age', 'DistanceFromHome'], axis=1).reset_index(drop=True)
+
+                return df
+
+            df = compute_loss_ratio(df)
+            return df
+        target = "lr"
+        task_uniform = self.make_task("uniform", is_regression=True, target=target)
+        self.train_data["Age"] = self.train_data["Age"] + .1
+        generator = GaussianCopula()
+        generator.fit(self.train_data)
+        sampler = Sampler(task_uniform, self.train_data, generator, preprocess_fn=preprocess_fn)
+        binned_data = preprocess_fn(sampler.train_data.copy())
+        binned_data[target] = pd.cut(x=preprocess_fn(self.train_data.copy())[target], bins=5)
+        combined_data, sampling_method_info, score_aggregate = sampler.sample_data()
+        copy_combined = preprocess_fn(combined_data.copy())
+        copy_combined[target] = pd.cut(x=copy_combined[target], bins=5)
         for value in sampler._get_class_to_sample_size(copy_combined).values():
             self.assertEqual(value, 0)
 

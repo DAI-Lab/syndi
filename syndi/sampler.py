@@ -4,19 +4,21 @@ import random
 import sys
 
 import pandas as pd  # Basic data manipulation
+import numpy as np
 from sdv.evaluation import evaluate  # Evaluate synthetic data
 
 import syndi.task as task
 
 
 class Sampler():
-    def __init__(self, task_instance, train_data, generator):
+    def __init__(self, task_instance, train_data, generator, preprocess_fn=None):
         sample_method_name = task_instance.sampling_method_id
         self.task = task_instance
         self.sample_method_info = sample_method_name.split("_")
         self.sampling_method = self.sample_method_info[0]
         self.generator = generator
         self.train_data = train_data
+        self.preprocess_fn = preprocess_fn
 
     def sample_data(self):
         self.logs = []
@@ -121,9 +123,14 @@ class Sampler():
         increasing_sample_size *= self.task.regression_bins
 
         def get_subtable_in_interval(interval, table):
-            valid_indexes = table[target].between(interval.left, interval.right, inclusive="right")
+            processed_table = self.preprocess_fn(table.copy()) if self.preprocess_fn else table
+            in_range_indexes = processed_table[target].between(interval.left, interval.right, inclusive="right")
+            not_left_indexes = processed_table[self.task.target].ne(interval.left)
+            valid_indexes = in_range_indexes & not_left_indexes
+            # print(table.shape)
+            # print(processed_table.shape)
+            # print(valid_indexes.shape)
             table = table[valid_indexes]
-            table = table[table[self.task.target].ne(interval.left)]
             return table
 
         data = self.generator.sample(increasing_sample_size)
@@ -156,10 +163,13 @@ class Sampler():
         bins = self.task.regression_bins
         self.train_data
         binned_data = self.train_data.copy()
-        binned_data[self.task.target] = pd.cut(x=self.train_data[self.task.target], bins=bins)
+        if self.preprocess_fn:
+            binned_data = self.preprocess_fn(binned_data)
+        dtype = binned_data[self.task.target].dtypes
+        binned_data[self.task.target] = pd.cut(x=binned_data[self.task.target], bins=bins)
         class_to_sample_size = self._get_class_to_sample_size(binned_data)
-        print(class_to_sample_size)
-        dtype = self.train_data[self.task.target].dtypes
+        # print(class_to_sample_size)
+        
 
         def int_uniform_bin_draw(interval):
             left = interval.left + 1 if interval.left.is_integer() else interval.left
@@ -177,9 +187,10 @@ class Sampler():
         rows = []
         for interval, sample_size in class_to_sample_size.items():
             data = self._sample_in_interval(sample_size, interval)
-            data[self.task.target] = data[self.task.target].astype(dtype)
+            # data[self.task.target] = data[self.task.target].astype(dtype)
             rows.append(data)
         synthetic_data = pd.concat(rows)
+        processed_data = self.preprocess_fn(self.train_data) if self.preprocess_fn else self.train_data
         assert(self.train_data.dtypes.to_list() == synthetic_data.dtypes.to_list())
         score_aggregate = evaluate(synthetic_data, self.train_data, aggregate=True)
         return synthetic_data, sampling_method, score_aggregate

@@ -1,4 +1,4 @@
 ,Task ID,SD Generator Path,Classifier Name,Sampling Method,Run,Time,Status,auc,f1,recall,precision,accuracy
-0,0_none_baseline_lr_0,generators/default_gaussain_copula.pkl,lr,baseline,0,0.4571428571428572,Status.SUCCESS,7.539873838424683,0.4666666666666667,0.5,0.4375,0.875
-3,3_default_tvae_original_0_lr_0,generators/default_tvae.pkl,lr,original 20/60,0,0.4742857142857143,Status.SUCCESS,1.690852403640747,0.4666666666666667,0.5,0.4375,0.875
-5,5_default_tvae_original_1_lr_0,generators/default_tvae.pkl,lr,original 40/60,0,0.4685714285714285,Status.SUCCESS,1.6557629108428955,0.4666666666666667,0.5,0.4375,0.875
+0,0_none_baseline_lr_0,generators/default_gaussain_copula.pkl,lr,baseline,0,0.4571428571428572,Status.SUCCESS,7.296797275543213,0.4666666666666667,0.5,0.4375,0.875
+3,3_default_tvae_original_0_lr_0,generators/default_tvae.pkl,lr,original 20/60,0,0.47428571428571425,Status.SUCCESS,1.5380127429962158,0.4666666666666667,0.5,0.4375,0.875
+4,4_default_gaussain_copula_original_0_lr_0,generators/default_gaussain_copula.pkl,lr,original 20/60,0,0.44571428571428573,Status.SUCCESS,1.5646662712097168,0.4666666666666667,0.5,0.4375,0.875

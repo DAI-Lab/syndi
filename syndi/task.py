@@ -170,7 +170,7 @@ def create_tasks(train_dataset="data/train.csv",
                  test_dataset="data/test.csv", target="TARGET",
                  path_to_generators="generators/", pycaret_models=None,
                  task_sampling_method="all", run_num=1, output_dir=None,
-                 is_regression=False, regression_bins=5):
+                 is_regression=False, regression_bins=5, preprocess_fn=None):
     """Create a list of benchmark task objects.
 
     Args:
@@ -207,9 +207,12 @@ def create_tasks(train_dataset="data/train.csv",
         pycaret_functions = classification
         if is_regression:
             pycaret_functions = regression
-        pycaret_functions.setup(train_data,
+        preprocessed_train = preprocess_fn(train_data) if preprocess_fn else train_data
+        preprocessed_test = preprocess_fn(test_data) if preprocess_fn else test_data
+            
+        pycaret_functions.setup(preprocessed_train,
                                 target=target,
-                                test_data=test_data,
+                                test_data=preprocessed_test,
                                 silent=True,
                                 verbose=False)
         pycaret_models = pycaret_functions.models().index.to_list()

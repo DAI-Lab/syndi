@@ -18,7 +18,7 @@ class Task_Evaluator():
         self.train_data = pd.read_csv(task.train_dataset)
         self.test_data = pd.read_csv(task.test_dataset)
         generator = sdv.sdv.SDV.load(task.path_to_generator)
-        self.sampler = Sampler(task, self.train_data, generator)
+        self.sampler = Sampler(task, self.train_data, generator, preprocess_fn)
         self.preprocess_fn = preprocess_fn
 
     def evaluate_task(self, metrics=None):

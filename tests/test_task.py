@@ -50,10 +50,14 @@ class TestTask(unittest.TestCase):
     def test_create_tasks(self):
         output_dir = "tasks"
         path_to_generators = "generators/"
+        def preprocess_fn(df):
+            df = df.rename(columns = {'Attrition':'target'})
+            return df
         tasks = task.create_tasks(train_dataset="data/train.csv",
-                                  test_dataset="data/test.csv", target="Attrition",
+                                  test_dataset="data/test.csv", target="target",
                                   path_to_generators=path_to_generators, pycaret_models=None,
-                                  task_sampling_method="all", run_num=1, output_dir=output_dir)
+                                  task_sampling_method="all", run_num=1, output_dir=output_dir,
+                                  preprocess_fn=preprocess_fn)
 
         files = os.listdir(output_dir)  # dir is your directory path
         file_count = len(files)

@@ -38,8 +38,8 @@ install-test: clean-build clean-pyc ## install the package and test dependencies
 	pip install .[test]
 
 .PHONY: test #-k test_benchmark_classification
-test: ## run tests quickly with the default Python - -k 'test_benchmark_classification'
-	python -m pytest --cov=syndi --cov-report xml -k 'test_uniform_regression_preprocess' -s
+test: ## run tests quickly with the default Python : -k 'test_sample_uniform_regression_preprocess' -s
+	python -m pytest --cov=syndi --cov-report xml -k 'TestBenchmark' 
 
 .PHONY: lint
 lint: ## check style with flake8 and isort
