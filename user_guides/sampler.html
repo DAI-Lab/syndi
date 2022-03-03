@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Sampler &#8212; syndi 0.1.0.dev0 documentation</title>
+    
+    <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  
+    
+    <link rel="stylesheet"
+      href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    <link rel="preload" as="font" type="font/woff2" crossorigin
+      href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+  
+    
+      
+  
+    
+    <link rel="stylesheet" href="../_static/styles/pydata-sphinx-theme.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/language_data.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <link rel="shortcut icon" href="../_static/dai-logo-white.ico"/>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Evaluation" href="task_evaluator.html" />
+    <link rel="prev" title="Task" href="task.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+    <nav class="navbar navbar-light navbar-expand-lg bg-light fixed-top bd-navbar" id="navbar-main"><div class="container-xl">
+
+  <div id="navbar-start">
+    
+    
+
+<a class="navbar-brand" href="../index.html">
+  <img src="../_static/dai-logo-white-200.png" class="logo" alt="logo">
+</a>
+
+
+    
+  </div>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-collapsible" aria-controls="navbar-collapsible" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  
+  <div id="navbar-collapsible" class="col-lg-9 collapse navbar-collapse">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <ul id="navbar-main-elements" class="navbar-nav">
+    <li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../getting_started/index.html">
+  Getting Started
+ </a>
+</li>
+
+<li class="toctree-l1 current active nav-item">
+ <a class="reference internal nav-link" href="index.html">
+  User Guides
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../api_reference/index.html">
+  API Reference
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../developer_guides/index.html">
+  Developer Guides
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../history.html">
+  Release Notes
+ </a>
+</li>
+
+<li class="toctree-l1 nav-item">
+ <a class="reference internal nav-link" href="../authors.html">
+  Credits
+ </a>
+</li>
+
+    
+</ul>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          <a class="nav-link" href="https://github.com/DAI-Lab/syndi" rel="noopener" target="_blank" title="GitHub"><span><i class="fab fa-github-square"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+</div>
+    </nav>
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+            
+            <!-- Only show if we have sidebars configured, else just a small margin  -->
+            <div class="col-12 col-md-3 bd-sidebar">
+              <div class="sidebar-start-items"><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+  <div class="bd-toc-item active">
+    <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="task.html">
+   Task
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Sampler
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="task_evaluator.html">
+   Evaluation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="benchmark.html">
+   Benchmark
+  </a>
+ </li>
+</ul>
+
+  </div>
+</nav>
+              </div>
+              <div class="sidebar-end-items">
+              </div>
+            </div>
+            
+          
+
+          
+          <div class="d-none d-xl-block col-xl-2 bd-toc">
+            
+              
+              <div class="toc-item">
+                
+<div class="tocsection onthispage pt-5 pb-3">
+    <i class="fas fa-list"></i> On this page
+</div>
+
+<nav id="bd-toc-nav">
+    <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#data-format">
+   Data Format
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#input">
+     Input
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#synthetic-data-generation">
+     Synthetic Data Generation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#output">
+     Output
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+</nav>
+              </div>
+              
+              <div class="toc-item">
+                
+              </div>
+              
+            
+          </div>
+          
+
+          
+          
+            
+          
+          <main class="col-12 col-md-9 col-xl-7 py-md-5 pl-md-5 pr-md-4 bd-content" role="main">
+              
+              <div>
+                
+  <section id="sampler-1">
+<span id="sampler"></span><h1>Sampler<a class="headerlink" href="#sampler-1" title="Permalink to this headline">¶</a></h1>
+<p>Sampler takes a task as input and the corresponding data generator. Sampler uses the data generator to make synthetic data that it concatenates with the training data and returns.</p>
+<section id="data-format">
+<h2>Data Format<a class="headerlink" href="#data-format" title="Permalink to this headline">¶</a></h2>
+<section id="input">
+<h3>Input<a class="headerlink" href="#input" title="Permalink to this headline">¶</a></h3>
+<p>Here we will have an example table, train_data, generator.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">timestamp</span></code>: an INTEGER or FLOAT column with the time of the observation in Unix Time Format</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">value</span></code>: an INTEGER or FLOAT column with the observed value at the indicated timestamp</p></li>
+</ul>
+<p>This is an example of such table:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>timestamp</p></td>
+<td><p>value</p></td>
+</tr>
+<tr class="row-even"><td><p>1222819200</p></td>
+<td><p>-0.366358</p></td>
+</tr>
+<tr class="row-odd"><td><p>1222840800</p></td>
+<td><p>-0.394107</p></td>
+</tr>
+<tr class="row-even"><td><p>1222862400</p></td>
+<td><p>0.403624</p></td>
+</tr>
+<tr class="row-odd"><td><p>1222884000</p></td>
+<td><p>-0.362759</p></td>
+</tr>
+<tr class="row-even"><td><p>1222905600</p></td>
+<td><p>-0.370746</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="synthetic-data-generation">
+<h3>Synthetic Data Generation<a class="headerlink" href="#synthetic-data-generation" title="Permalink to this headline">¶</a></h3>
+<p>Here we will show that the sampler uses the task defined parameters to generate the synthetic data.</p>
+</section>
+<section id="output">
+<h3>Output<a class="headerlink" href="#output" title="Permalink to this headline">¶</a></h3>
+<p>Here we will show that the output is simply synthetic data concatenated with the training data.:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">start</span></code>: timestamp where the anomalous interval starts</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">end</span></code>: timestamp where the anomalous interval ends</p></li>
+</ul>
+<p>Optionally, a third column called <code class="docutils literal notranslate"><span class="pre">severity</span></code> can be included with a value that represents the
+severity of the detected anomaly.</p>
+<p>An example of such a table is:</p>
+<table class="table">
+<tbody>
+<tr class="row-odd"><td><p>start</p></td>
+<td><p>end</p></td>
+<td><p>severity</p></td>
+</tr>
+<tr class="row-even"><td><p>1222970400</p></td>
+<td><p>1222992000</p></td>
+<td><p>0.572643</p></td>
+</tr>
+<tr class="row-odd"><td><p>1223013600</p></td>
+<td><p>1223035200</p></td>
+<td><p>0.572643</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+
+
+              </div>
+              
+              
+              <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="task.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Task</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="task_evaluator.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Evaluation</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+              
+          </main>
+          
+
+      </div>
+    </div>
+  
+    <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <footer class="footer mt-5 mt-md-0">
+  <div class="container">
+    
+    <div class="footer-item">
+      <p class="copyright">
+    &copy; Copyright 2021, MIT Data To AI Lab.<br>
+</p>
+    </div>
+    
+    <div class="footer-item">
+      <p class="sphinx-version">
+Created using <a href="http://sphinx-doc.org/">Sphinx</a> 3.2.1.<br>
+</p>
+    </div>
+    
+  </div>
+</footer>
+  </body>
+</html>

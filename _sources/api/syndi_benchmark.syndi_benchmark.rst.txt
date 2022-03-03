@@ -1,7 +1,0 @@
-syndi\_benchmark.syndi\_benchmark module
-========================================
-
-.. automodule:: syndi_benchmark.syndi_benchmark
-   :members:
-   :undoc-members:
-   :show-inheritance:
