@@ -11,7 +11,7 @@ TEST_PATH = os.path.join(DATA_PATH,
 )
 
 def load_demo_data():
-    train_path
+    pd.read_csv("https://d3-ai-syndi.s3.us-east-2.amazonaws.com/insurance.csv")
     train = pd.load_csv(TRAIN_PATH)
     test = pd.load_csv(TEST_PATH)
     return train, test
