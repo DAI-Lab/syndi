@@ -97,23 +97,40 @@ class Task_Evaluator():
 
         return [auc, f1, recall, precision, accuracy, support]
     @classmethod
-    def calculate_gini(cls, x):
-        """
-        input: nx2 array
-        output: gini coefficient
-
-        Notes:
-        (Warning: This is a concise implementation, but it is O(n**2)
-        in time and memory, where n = len(x).  *Don't* pass in huge
-        samples!)
-        """
-        # Mean absolute difference
-        mad = np.abs(np.subtract.outer(x, x)).mean()
-        # Relative mean absolute difference
-        rmad = mad/np.mean(x)
-        # Gini coefficient
-        g = 0.5 * rmad
-        return g
+    def get_gini(cls, data, pred, actual, weight_var=None):
+        lr = "lr"
+        data_size = data.shape[0]
+        weights = np.ones(data_size)
+        if weight_var is not None:
+            weights = data[weight_var].to_numpy()
+            weights = weights
+        else:
+            weight_var = "weights"
+        frame = {
+            lr: round(data[pred]/weights,8),
+            pred: data[pred], 
+            actual: data[actual]/np.sum(data[actual]),
+            weight_var: weights/np.sum(weights)
+            }
+        df = pd.DataFrame(frame)
+        # take mean of rows with same lr
+        df = df.groupby(lr).mean().reset_index() 
+        # sort by lr
+        df = df.sort_values(lr, ascending=True)
+        #calculate cumulative sums
+        cum_weights = np.cumsum(df[weight_var]) / np.sum(df[weight_var])
+        cum_actual = np.cumsum(df[actual])/np.sum(df[actual])
+        #calculate A
+        A = np.trapz(y=cum_weights - cum_actual, x=cum_weights)
+        #calculate A+B
+        df = df.copy().sort_values(actual, ascending=True)
+        perfect_cum_actual = np.cumsum(df[actual])/np.sum(df[actual])
+        perfect_weights = df[weight_var]
+        perfect_normalized_weights = perfect_weights/ np.sum(perfect_weights)
+        A_B = .5-np.sum(perfect_cum_actual*perfect_normalized_weights)
+        #calculate gini
+        gini = A/A_B
+        return gini
 
     @classmethod
     def _get_regression_scores(cls, ground_truth, predictions, classifier_score):
@@ -125,8 +142,14 @@ class Task_Evaluator():
             msle = sklearn.metrics.mean_squared_log_error(ground_truth, predictions)
         except ValueError:
             pass
-        gini_input = np.hstack([ground_truth, predictions])
-        gini = Task_Evaluator.calculate_gini(gini_input)
+        actual="ground_truth"
+        pred="predictions"
+        gini_input_dict = {
+            pred:predictions,
+            actual:ground_truth,
+        }
+        gini_input_data = pd.DataFrame.from_dict(gini_input_dict)
+        gini = Task_Evaluator.get_gini(gini_input_data, pred, actual)
         return [mae, mse, r2, msle, gini]
 
     def _store_classifier(self, classifier_model):

@@ -57,8 +57,12 @@ class Results_Table():
     def get_df(self):
         return self.result_df
 
+def benchmark_sampling(tasks):
+    for task in tasks:
+        
 
-def benchmark(tasks, metrics=None, agnostic_metrics=False,
+
+def benchmark_prediction(tasks, metrics=None, agnostic_metrics=False,
               output_path='results/', summary_metric="accuracy", is_regression=False):
     """benchmark function
     
